@@ -1,0 +1,12 @@
+drawer-layout {
+  display: flex;
+}
+
+drawer-layout__drawer {
+  width: 15em;  
+}
+
+drawer-layout__content {
+  flex: 1;
+  background: #eee;
+}

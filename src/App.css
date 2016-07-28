@@ -1,0 +1,62 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.app-header {
+  text-align: center;
+  background-color: #222;
+  padding: 1em;
+  color: white;
+}
+
+.app-header__logo {
+  animation: spin infinite 10s linear;
+  height: 80px;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.navigation {
+  background: #222;
+}
+
+.navigation__links {
+  color: #fff;
+}
+
+.centered-content {
+  width: 1250px;
+  margin: 0 auto;
+}
+
+.full-height-content {
+  height: 100%;
+}
+
+.x-padded-content {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.y-padded-content {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.card {
+  background: #fff;
+  padding: 1em;
+  box-shadow: 0 0 10px 5px lightgrey;
+}
