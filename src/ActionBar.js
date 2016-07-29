@@ -17,29 +17,40 @@ export class ActionBar extends Component {
   }
 
   componentWillUnmount() {
-    this.teardownScrollListeners();
+    this.unsubscribeSubscriptions();
   }
 
   setupScrollListeners() {
-    this.scrollListener = Rx.Observable.fromEvent(window, 'scroll')
+    const scrollChange$ =  Rx.Observable.fromEvent(window, 'scroll')
       .map(() => this.props.scrollContainer.scrollY)
-      // .do(scrollY => console.log('scrollY:', scrollY))
       .bufferTime(500)
       .filter(buffer => buffer.length > 0)
-      // .do(bufferedScrollY => console.log('buffered scrollY', bufferedScrollY))
-      .map(positions => positions[0] - positions[positions.length - 1])
-      // .do(delta => console.log('delta', delta))
-      .filter(delta => Math.abs(delta) > this.props.scrollChange)
-      // .do(delta => console.log('delta over', delta))
-      .map(delta => delta < 0 ? 'down' : 'up')
-      // .do(direction => console.log('direction', direction))
-      .subscribe(direction => {
-        this.setState({ scrollDirection: direction  });
-      });
+      .map(positions => positions[0] - positions[positions.length - 1]);
+
+    this.addSubscription(
+      scrollChange$
+      .filter(delta => delta > 0)
+      .filter(delta => Math.abs(delta) > this.props.minimumUpScrollDistance)
+      .subscribe(() => {
+        this.setState({ scrollDirection: 'up' });
+      })
+    );
+
+    this.addSubscription(
+      scrollChange$
+      .filter(delta => delta < 0)
+      .subscribe(() => {
+        this.setState({ scrollDirection: 'down' });
+      })
+    );
   }
 
-  teardownScrollListeners() {
-    this.scrollListener.unsubscribe();
+  addSubscription(subscription) {
+    this.subscriptions = (this.subscriptions || []).concat(subscription);
+  }
+
+  unsubscribeSubscriptions() {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
   render() {

@@ -33,7 +33,7 @@ class App extends Component {
                 {longContent}
               </div>
             </div>
-            <ActionBar scrollContainer={window} scrollChange={50} />
+            <ActionBar scrollContainer={window} minimumUpScrollDistance={50} />
           </div>
         </div>
       </div>
