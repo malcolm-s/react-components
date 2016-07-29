@@ -1,5 +1,4 @@
 .action-bar {
-  border-top: 2px solid #ddd;
   background-color: white;
   transition: 0.3s ease-in-out transform;
 }
@@ -14,11 +13,6 @@
 
 .action-bar__container {
   position: fixed;
-  width: calc(100vw - 15em);
   bottom: 0;
-  left: 15em;
-}
-
-.action-bar__content {
-  padding: 0.5em 0;
+  left: 0;
 }
