@@ -1,12 +1,30 @@
-drawer-layout {
+.drawer-layout {
   display: flex;
 }
 
-drawer-layout__drawer {
-  width: 15em;  
+.drawer-layout__drawer {
+  width: 15em;
+  transition: 0.3s ease-in-out transform;
 }
 
-drawer-layout__content {
+.drawer-layout--open .drawer-layout__drawer {
+  transform: translateX(0);
+}
+
+.drawer-layout--closed .drawer-layout__drawer {
+  transform: translateX(-15em);
+}
+
+.drawer-layout--open .drawer-layout__content {
+  transform: translateX(0);
+}
+
+.drawer-layout--closed .drawer-layout__content {
+  transform: translateX(-15em);
+}
+
+.drawer-layout__content {
   flex: 1;
   background: #eee;
+  transition: 0.3s ease-in-out transform;
 }
